@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/my_nav"
+    app:startDestination="@id/home_fragment">
+
+    <fragment
+        android:id="@+id/home_fragment"
+        android:name="com.example.livedata.home_fragment"
+        android:label="fragment_home_fragment"
+        tools:layout="@layout/fragment_home_fragment" >
+        <action
+            android:id="@+id/action_home_fragment_to_timer_fragment"
+            app:destination="@id/custom_timer_fragment" />
+        <action
+            android:id="@+id/action_home_fragment_to_quickietimerFragment"
+            app:destination="@id/quickietimerFragment" />
+        <action
+            android:id="@+id/action_home_fragment_to_covidTimerFragment"
+            app:destination="@id/covidTimerFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/custom_timer_fragment"
+        android:name="com.example.livedata.timer_fragment"
+        android:label="fragment_timer_fragment"
+        tools:layout="@layout/fragment_timer_fragment" >
+        <action
+            android:id="@+id/action_custom_timer_fragment_to_home_fragment2"
+            app:destination="@id/home_fragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/quickietimerFragment"
+        android:name="com.example.livedata.QuickietimerFragment"
+        android:label="fragment_quickietimer"
+        tools:layout="@layout/fragment_quickietimer" >
+        <action
+            android:id="@+id/action_quickietimerFragment_to_home_fragment"
+            app:destination="@id/home_fragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/covidTimerFragment"
+        android:name="com.example.livedata.CovidTimerFragment"
+        android:label="fragment_covid_timer"
+        tools:layout="@layout/fragment_covid_timer" >
+        <action
+            android:id="@+id/action_covidTimerFragment_to_home_fragment"
+            app:destination="@id/home_fragment" />
+    </fragment>
+</navigation>
