@@ -1,4 +1,4 @@
-package com.example.livedata
+package com.example.livedata.ui.fragments
 
 import android.os.Bundle
 import androidx.fragment.app.Fragment

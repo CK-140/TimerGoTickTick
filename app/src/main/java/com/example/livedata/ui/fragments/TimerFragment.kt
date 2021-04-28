@@ -16,12 +16,11 @@ import com.example.livedata.databinding.FragmentHomeFragmentBinding
 import com.example.livedata.databinding.FragmentTimerFragmentBinding
 
 
-class timer_fragment : Fragment(R.layout.fragment_timer_fragment){
+class timer_fragment : Fragment(){
     private val viewModel by activityViewModels<MainViewModel>()
     private var _binding: FragmentTimerFragmentBinding? = null
-    // This property is only valid between onCreateView and
-// onDestroyView.
     private val binding get() = _binding!!
+
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
@@ -29,23 +28,40 @@ class timer_fragment : Fragment(R.layout.fragment_timer_fragment){
     ): View? {
         _binding = FragmentTimerFragmentBinding.inflate(inflater, container, false)
         val view = binding.root
+        val viewModel = ViewModelProvider(this).get(MainViewModel::class.java)
+
+
+        viewModel.seconds().observe(viewLifecycleOwner, Observer {
+            binding.timeCustomSeconds.text = it.toString()
+        })
+
+        viewModel.finished.observe(viewLifecycleOwner, Observer {
+            if(it){
+                Toast.makeText(activity,"finished",Toast.LENGTH_SHORT).show()
+            }
+        })
+
+        binding.startButton.setOnClickListener(View.OnClickListener {
+            if(binding.timeEditor.text.isEmpty() || binding.timeEditor.text.length<4){
+                Toast.makeText(activity,"Invalid", Toast.LENGTH_SHORT).show()
+            }
+            else{
+
+                viewModel.timerValue.value = binding.timeEditor.text.toString().toLong()
+            }
+            viewModel.startTimer()
+        })
+
+        binding.stopButton.setOnClickListener(View.OnClickListener {
+            binding.timeCustomSeconds.text = "0"
+            viewModel.stopTimer()
+        })
+
         return view
 
     }
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        val viewModel = ViewModelProvider(this).get(MainViewModel::class.java)
-        viewModel.startTimer()
-
-        viewModel.seconds().observe(this, Observer {
-            binding.timeCustomSeconds.text = it.toString()
-        })
-
-        viewModel.finished.observe(this, Observer {
-            if(it){
-                Toast.makeText(activity,"finished",Toast.LENGTH_SHORT).show()
-            }
-        })
 
     }
 

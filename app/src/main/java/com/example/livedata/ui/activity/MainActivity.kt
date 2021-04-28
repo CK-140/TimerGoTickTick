@@ -1,11 +1,10 @@
-package com.example.livedata
+package com.example.livedata.ui.activity
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import androidx.lifecycle.Observer
-import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.NavController
 import androidx.navigation.findNavController
+import com.example.livedata.R
 
 class MainActivity : AppCompatActivity() {
     private lateinit var navController: NavController
